@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import {useState } from "react"
 import Form from "./components/Form"
 import Contributor from "./components/Contributor"
 import './App.css';
@@ -23,10 +23,6 @@ function App() {
               setIsDataDisplayed={setIsDataDisplayed}
             />  
   })
-
-  // useEffect(() => {
-  //   console.log(contributors)
-  // }, [contributors])
 
   return (
     <div className="app">

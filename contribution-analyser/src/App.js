@@ -44,7 +44,7 @@ function App() {
               <p><span className="label">Repo name:</span> {name}</p>
               <p><span className="label">Description:</span> {description ? description : "No description"}</p>
               <p><span className="label">Language:</span> {language}</p>
-              <p><span className="label">License:</span> {license ? <a href={license.url} target="_blank">{license.name}</a> : "No license"}</p>
+              <p><span className="label">License:</span> {license ? license.name : "No license"}</p>
               <p><span className="label">Star count:</span> {stargazers_count}</p>
               <p><span className="label">URL:</span> <a href={html_url} target="_blank">{html_url}</a></p>
             </div>

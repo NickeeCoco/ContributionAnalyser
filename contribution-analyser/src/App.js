@@ -16,6 +16,16 @@ function App() {
 
   const {name, description, language, license, stargazers_count, url} = repoData
 
+  const contributorElements = contributors.map(contributor => {
+    return (
+      <div className="contributor" key={contributor.id}>
+        <img src={contributor.avatar_url} />
+        <p>Login: {contributor.login}</p>
+        <p>Number of contributions: {contributor.contributions}</p>
+      </div>
+    )  
+  })
+
   const octokit = new Octokit({
     auth: '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'
   })
@@ -95,6 +105,11 @@ function App() {
             <p><span className="bold">License:</span> {license ? <a href={license.url}>{license.name}</a> : "No license"}</p>
             <p><span className="bold">Star count:</span> {stargazers_count}</p>
             <p><span className="bold">URL:</span> <a href={url}>{url}</a></p>
+
+            <div>
+              <h3>Contributors</h3>
+              {contributorElements}
+            </div>
           </div>
       }
 

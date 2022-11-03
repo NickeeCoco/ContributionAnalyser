@@ -1,6 +1,8 @@
 import {useState} from "react"
+import {getGithubData, getTopContributors} from "../fetchData"
 
-function Form() {
+function Form(props) {
+    const {setRepoData, setContributors, setHasError, setIsDataDisplayed} = props
     
     const [formData, setFormData] = useState({
         owner: "",
@@ -19,12 +21,14 @@ function Form() {
 
     function handleSubmit(e) {
         e.preventDefault()
-        console.log(formData)
+        const { owner, repo } = formData
+        getGithubData(owner, repo, setRepoData, setHasError, setIsDataDisplayed)
+        getTopContributors(owner, repo, setContributors, setHasError, setIsDataDisplayed)
     }
 
     return (
         <form onSubmit={handleSubmit} >
-            <label htmlFor="owner">Owner: </label>
+            <label className="label" htmlFor="owner">Owner: </label>
             <input
                 id="owner"
                 type="text"
@@ -33,7 +37,7 @@ function Form() {
                 value={formData.owner}
             />
             <br />
-            <label htmlFor="repo">Repo: </label>
+            <label className="label" htmlFor="repo">Repo: </label>
             <input
                 id="repo"
                 type="text"

@@ -59,7 +59,12 @@ function App() {
 
   return (
     <div className="app">
-      <Form />
+      <Form 
+        setRepoData={setRepoData} 
+        setContributors={setContributors} 
+        setHasError={setHasError}
+        setIsDataDisplayed={setIsDataDisplayed}
+      />
 
       <hr/>
 

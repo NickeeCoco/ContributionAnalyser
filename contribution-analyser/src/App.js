@@ -11,7 +11,7 @@ function App() {
   const [isDataDisplayed, setIsDataDisplayed] = useState(false)
   const [hasError, setHasError] = useState(false)
 
-  const {name, description, language, license, stargazers_count, url} = repoData
+  const {name, description, language, license, stargazers_count, html_url} = repoData
 
   const contributorElements = contributors.map(contributor => {
     return (
@@ -44,9 +44,9 @@ function App() {
               <p><span className="label">Repo name:</span> {name}</p>
               <p><span className="label">Description:</span> {description ? description : "No description"}</p>
               <p><span className="label">Language:</span> {language}</p>
-              <p><span className="label">License:</span> {license ? <a href={license.url}>{license.name}</a> : "No license"}</p>
+              <p><span className="label">License:</span> {license ? <a href={license.url} target="_blank">{license.name}</a> : "No license"}</p>
               <p><span className="label">Star count:</span> {stargazers_count}</p>
-              <p><span className="label">URL:</span> <a href={url}>{url}</a></p>
+              <p><span className="label">URL:</span> <a href={html_url} target="_blank">{html_url}</a></p>
             </div>
             
 

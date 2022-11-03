@@ -11,10 +11,10 @@ async function getGithubData(owner, repo, setRepoData, setHasError, setIsDataDis
             repo,
         })
 
-        const { name, description, language, license, stargazers_count, url, contributors_url } = result.data
+        const { name, description, language, license, stargazers_count, html_url } = result.data
 
         setHasError(false)
-        setRepoData({ name, description, language, license, stargazers_count, url, contributors_url })
+        setRepoData({ name, description, language, license, stargazers_count, html_url })
         setIsDataDisplayed(true)
     } catch (err) {
         setHasError(true)

@@ -48,7 +48,7 @@ function App() {
       repo: "ruff"
     })
 
-    setContributors(contributors.data) 
+    setContributors(contributors.data.slice(0, 30)) 
   }
 
   function handleChange(e) {

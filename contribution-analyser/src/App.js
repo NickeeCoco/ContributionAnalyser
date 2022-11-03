@@ -28,7 +28,10 @@ function App() {
         owner,
         repo
       })
-      setRepoData(result.data)
+
+      const {name, description, language, license, stargazers_count, url} = result.data
+
+      setRepoData({name, description, language, license, stargazers_count, url})
       setIsDataDisplayed(true)
       setHasError(false)
     } catch (err) {

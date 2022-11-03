@@ -22,18 +22,27 @@ async function getGithubData(owner, repo, setRepoData, setHasError, setIsDataDis
     }
 }
 
-async function getTopContributors(owner, repo, setContributors, setHasError, setIsDataDisplayed) {
-    try {
-        const contributors = await octokit.request("GET /repos/{owner}/{repo}/contributors", {
-            owner,
-            repo
-        })
+async function getTopContributors(owner, repo, nbContributors, setContributors, setHasError, setIsDataDisplayed) {
+    const nbPages = Math.ceil(nbContributors / 100)
+    let currentPage = 1
+    let contributors = []
 
-        setContributors(contributors.data.slice(0, 30))
-    } catch (err) {
-        setHasError(true)
-        setIsDataDisplayed(false)
+    for(currentPage; currentPage <= nbPages; currentPage++) {
+        try {
+            const newContributors = await octokit.request("GET /repos/{owner}/{repo}/contributors", {
+                owner,
+                repo,
+                per_page: 100,
+                page: currentPage
+            })
+    
+            contributors = [...contributors, ...newContributors.data]
+        } catch (err) {
+            setHasError(true)
+            setIsDataDisplayed(false)
+        }
     }
+    setContributors(contributors.slice(0, nbContributors))
 }
 
 async function getContributorDetails(contributor, setContributorDetails, setHasError, setIsDataDisplayed) {
@@ -42,8 +51,11 @@ async function getContributorDetails(contributor, setContributorDetails, setHasE
             contributor
         })
         setContributorDetails(contributorDetails.data)
+        setHasError(false)
+        setIsDataDisplayed(true)
     } catch (err) {
-        console.log(err)
+        setHasError(true)
+        setIsDataDisplayed(false)
     }
 }
 

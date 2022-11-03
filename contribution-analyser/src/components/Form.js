@@ -6,7 +6,8 @@ function Form(props) {
     
     const [formData, setFormData] = useState({
         owner: "",
-        repo: ""
+        repo: "",
+        nbContributors: 30
     })
 
     function handleChange(e) {
@@ -21,9 +22,9 @@ function Form(props) {
 
     function handleSubmit(e) {
         e.preventDefault()
-        const { owner, repo } = formData
+        const { owner, repo, nbContributors } = formData
         getGithubData(owner, repo, setRepoData, setHasError, setIsDataDisplayed)
-        getTopContributors(owner, repo, setContributors, setHasError, setIsDataDisplayed)
+        getTopContributors(owner, repo, nbContributors, setContributors, setHasError, setIsDataDisplayed)
     }
 
     return (
@@ -45,6 +46,19 @@ function Form(props) {
                 name="repo"
                 value={formData.repo}
             />
+            <br/>
+            <span>Display 
+                <input
+                    id="nbContributors"
+                    type="number"
+                    onChange={handleChange}
+                    name="nbContributors"
+                    value={formData.nbContributors}
+                    min={30}
+                    max={200}
+                />
+                contributors.
+            </span>
             <br />
             <button>Submit</button>
         </form>

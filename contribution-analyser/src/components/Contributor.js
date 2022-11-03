@@ -4,7 +4,7 @@ import { getContributorDetails } from "../fetchData"
 function Contributor(props) {
     const [contributorDetails, setContributorDetails] = useState({})
 
-    const {contributor, setHasError, setIsDataDisplayed} = props
+    const {contributor, index, setHasError, setIsDataDisplayed} = props
     const {name, company, location} = contributorDetails
 
     useEffect(() => {
@@ -12,7 +12,8 @@ function Contributor(props) {
     }, [contributor.login, setContributorDetails, setHasError, setIsDataDisplayed])
 
     return (
-        <div className="contributor" key={contributor.id}>
+        <div className="contributor">
+            <p className="contributor--index">{index + 1}.</p>
             <img src={contributor.avatar_url} alt={`${contributor.login}'s avatar`} />
             <div className="contributor--details">
                 <p><span className="label">Name:</span>{name ? name : "Unknown"}</p>

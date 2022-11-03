@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import Form from "./components/Form"
 import Contributor from "./components/Contributor"
 import './App.css';
@@ -13,14 +13,20 @@ function App() {
 
   const {name, description, language, license, stargazers_count, html_url} = repoData
 
-  const contributorElements = contributors.map(contributor => {
+  const contributorElements = contributors.map((contributor, index) => {
 
     return <Contributor 
+              key={contributor.id}
+              index={index}
               contributor={contributor}
               setHasError={setHasError}
               setIsDataDisplayed={setIsDataDisplayed}
             />  
   })
+
+  // useEffect(() => {
+  //   console.log(contributors)
+  // }, [contributors])
 
   return (
     <div className="app">

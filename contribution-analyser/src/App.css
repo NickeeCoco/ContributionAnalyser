@@ -26,6 +26,14 @@ input {
   margin-bottom: 1em;
 }
 
+input[type="number"] {
+  margin: 0 .5em;
+  text-align: right;
+}
+
+button {
+  margin-top: 1em;
+}
 
 .data {
   padding: 1.5em;
@@ -40,6 +48,12 @@ input {
   height: 120px;
   width: 450px;
   margin-bottom: 2em;
+}
+
+.contributor--index {
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin-right: .5em;
 }
 
 .contributor--details {

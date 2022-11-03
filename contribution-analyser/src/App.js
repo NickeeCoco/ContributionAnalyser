@@ -9,6 +9,7 @@ function App() {
   })
 
   const [repoData, setRepoData] = useState({})
+  const [isDataDisplayed, setIsDataDisplayed] = useState(false)
 
   const octokit = new Octokit({
     auth: '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'
@@ -25,8 +26,10 @@ function App() {
         repo
       })
       setRepoData(result.data)
+      setIsDataDisplayed(true)
     } catch (err) {
       console.log(err)
+      setIsDataDisplayed(false)
     }
   }
 
@@ -62,7 +65,12 @@ function App() {
         />
         <br/>
         <button>Submit</button>
-      </form> 
+      </form>
+
+      {
+        isDataDisplayed && 
+          <p>{repoData.name}, {repoData.description ? repoData.description : "No description"}, {repoData.language}, {repoData.license ? repoData.license : "No license"}, {repoData.stargazers_count}, {repoData.url}</p>
+      }
     </div>
   );
 }

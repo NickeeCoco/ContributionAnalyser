@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react"
+import { useState } from "react"
 import './App.css';
 import { Octokit } from "octokit"
 
@@ -31,10 +31,6 @@ function App() {
   const octokit = new Octokit({
     auth: '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'
   })
-
-  useEffect(() => {
-    console.log(contributors)
-  }, [contributors])
 
   async function getGithubData(owner, repo) {
     try {
@@ -97,6 +93,8 @@ function App() {
         <br/>
         <button>Submit</button>
       </form>
+
+      <hr/>
 
       {
         isDataDisplayed && 

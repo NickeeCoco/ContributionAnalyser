@@ -11,10 +11,6 @@ function Contributor(props) {
         getContributorDetails(contributor.login, setContributorDetails, setHasError, setIsDataDisplayed)
     }, [])
 
-    useEffect(() => {
-        console.log(contributorDetails)
-    }, [contributorDetails])
-
     return (
         <div className="contributor" key={contributor.id}>
             <img src={contributor.avatar_url} />

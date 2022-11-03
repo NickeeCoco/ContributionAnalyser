@@ -1,12 +1,9 @@
 import { useState } from "react"
+import Form from "./components/Form"
 import './App.css';
 import { Octokit } from "octokit"
 
 function App() {
-  const [formData, setFormData] = useState({
-    owner: "",
-    repo: ""
-  })
 
   const [repoData, setRepoData] = useState({})
   const [contributors, setContributors] = useState([])
@@ -59,40 +56,10 @@ function App() {
     setContributors(contributors.data.slice(0, 30)) 
   }
 
-  function handleChange(e) {
-    const {name, value} = e.target
-    setFormData(prevFormData => {
-      return {
-        ...prevFormData,
-        [name]: value
-      }
-    })
-  }
-
-  function handleSubmit(e) {
-    e.preventDefault()
-    const {owner, repo} = formData
-    getGithubData(owner, repo)
-    getTopContributors(owner, repo)
-  }
 
   return (
     <div className="app">
-      <form onSubmit={handleSubmit}>
-        <input type = "text"
-          onChange = {handleChange}
-          name = "owner"
-          value = {formData.owner}
-        />
-        <br/>
-        <input type = "text"
-          onChange = {handleChange}
-          name = "repo"
-          value = {formData.repo}
-        />
-        <br/>
-        <button>Submit</button>
-      </form>
+      <Form />
 
       <hr/>
 

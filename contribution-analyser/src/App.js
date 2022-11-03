@@ -10,6 +10,7 @@ function App() {
 
   const [repoData, setRepoData] = useState({})
   const [isDataDisplayed, setIsDataDisplayed] = useState(false)
+  const [hasError, setHasError] = useState(false)
 
   const {name, description, language, license, stargazers_count, url} = repoData
 
@@ -29,8 +30,9 @@ function App() {
       })
       setRepoData(result.data)
       setIsDataDisplayed(true)
+      setHasError(false)
     } catch (err) {
-      console.log(err)
+      setHasError(true)
       setIsDataDisplayed(false)
     }
   }
@@ -79,6 +81,11 @@ function App() {
             <p><span className="bold">Star count:</span> {stargazers_count}</p>
             <p><span className="bold">URL:</span> <a href={url}>{url}</a></p>
           </div>
+      }
+
+      {
+        hasError && 
+          <p>There was an error fetching the data. Please try another request.</p>
       }
     </div>
   );

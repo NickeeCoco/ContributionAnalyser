@@ -11,6 +11,8 @@ function App() {
   const [repoData, setRepoData] = useState({})
   const [isDataDisplayed, setIsDataDisplayed] = useState(false)
 
+  const {name, description, language, license, stargazers_count, url} = repoData
+
   const octokit = new Octokit({
     auth: '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'
   })
@@ -69,7 +71,14 @@ function App() {
 
       {
         isDataDisplayed && 
-          <p>{repoData.name}, {repoData.description ? repoData.description : "No description"}, {repoData.language}, {repoData.license ? repoData.license : "No license"}, {repoData.stargazers_count}, {repoData.url}</p>
+          <div>
+            <p><span className="bold">Repo name:</span> {name}</p>
+            <p><span className="bold">Description:</span> {description ? description : "No description"}</p>
+            <p><span className="bold">Language:</span> {language}</p>
+            <p><span className="bold">License:</span> {license ? license : "No license"}</p>
+            <p><span className="bold">Star count:</span> {stargazers_count}</p>
+            <p><span className="bold">URL:</span> <a href={url}>{url}</a></p>
+          </div>
       }
     </div>
   );

@@ -52,10 +52,10 @@ function App() {
     }
   }
 
-  async function getTopContributors() {
+  async function getTopContributors(owner, repo) {
     const contributors = await octokit.request("GET /repos/{owner}/{repo}/contributors", {
-      owner: "charliermarsh",
-      repo: "ruff"
+      owner,
+      repo
     })
 
     setContributors(contributors.data.slice(0, 30)) 
@@ -75,7 +75,7 @@ function App() {
     e.preventDefault()
     const {owner, repo} = formData
     getGithubData(owner, repo)
-    getTopContributors()
+    getTopContributors(owner, repo)
   }
 
   return (

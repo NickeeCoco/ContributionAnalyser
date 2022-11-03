@@ -20,8 +20,10 @@ function App() {
     return (
       <div className="contributor" key={contributor.id}>
         <img src={contributor.avatar_url} />
-        <p>Login: {contributor.login}</p>
-        <p>Number of contributions: {contributor.contributions}</p>
+        <div className="contributor--details">
+          <p><span className="label">Login:</span> {contributor.login}</p>
+          <p><span className="label">Contributions:</span> {contributor.contributions}</p>
+        </div>
       </div>
     )  
   })
@@ -79,7 +81,7 @@ function App() {
   }
 
   return (
-    <div className="App">
+    <div className="app">
       <form onSubmit={handleSubmit}>
         <input type = "text"
           onChange = {handleChange}
@@ -98,16 +100,20 @@ function App() {
 
       {
         isDataDisplayed && 
-          <div>
-            <p><span className="bold">Repo name:</span> {name}</p>
-            <p><span className="bold">Description:</span> {description ? description : "No description"}</p>
-            <p><span className="bold">Language:</span> {language}</p>
-            <p><span className="bold">License:</span> {license ? <a href={license.url}>{license.name}</a> : "No license"}</p>
-            <p><span className="bold">Star count:</span> {stargazers_count}</p>
-            <p><span className="bold">URL:</span> <a href={url}>{url}</a></p>
+          <div className="data">
+            <div className="data--repo">
+              <h3>Repo details</h3>
+              <p><span className="label">Repo name:</span> {name}</p>
+              <p><span className="label">Description:</span> {description ? description : "No description"}</p>
+              <p><span className="label">Language:</span> {language}</p>
+              <p><span className="label">License:</span> {license ? <a href={license.url}>{license.name}</a> : "No license"}</p>
+              <p><span className="label">Star count:</span> {stargazers_count}</p>
+              <p><span className="label">URL:</span> <a href={url}>{url}</a></p>
+            </div>
+            
 
-            <div>
-              <h3>Contributors</h3>
+            <div className="data--contributors">
+              <h3>Top contributors</h3>
               {contributorElements}
             </div>
           </div>

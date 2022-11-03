@@ -16,7 +16,11 @@ function App() {
 
   const contributorElements = contributors.map(contributor => {
 
-    return <Contributor contributor={contributor} />  
+    return <Contributor 
+              contributor={contributor}
+              setHasError={setHasError}
+              setIsDataDisplayed={setIsDataDisplayed}
+            />  
   })
 
   return (

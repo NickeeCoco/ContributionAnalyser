@@ -36,15 +36,14 @@ async function getTopContributors(owner, repo, setContributors, setHasError, set
     }
 }
 
-async function getContributorDetails(contributor, setHasError, setIsDataDisplayed) {
+async function getContributorDetails(contributor, setContributorDetails, setHasError, setIsDataDisplayed) {
     try {
         const contributorDetails = await octokit.request("GET /users/{contributor}", {
             contributor
         })
-        return contributorDetails.data
+        setContributorDetails(contributorDetails.data)
     } catch (err) {
-        setHasError(true)
-        setIsDataDisplayed(false)
+        console.log(err)
     }
 }
 

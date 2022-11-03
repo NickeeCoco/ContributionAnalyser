@@ -8,20 +8,26 @@ function App() {
     repo: ""
   })
 
+  const [repoData, setRepoData] = useState({})
+
   const octokit = new Octokit({
     auth: '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'
   })
 
-  // useEffect(() => {
-  //   getGithubUsers()
-  // }, [])
+  useEffect(() => {
+    console.log(repoData)
+  }, [repoData])
 
   async function getGithubData(owner, repo) {
-    const result = await octokit.request("GET /repos/{owner}/{repo}", {
-      owner,
-      repo
-    })
-    console.log(result.data)
+    try {
+      const result = await octokit.request("GET /repos/{owner}/{repo}", {
+        owner,
+        repo
+      })
+      setRepoData(result.data)
+    } catch (err) {
+      console.log(err)
+    }
   }
 
   function handleChange(e) {
@@ -47,12 +53,14 @@ function App() {
           onChange = {handleChange}
           name = "owner"
           value = {formData.owner}
-        /> 
+        />
+        <br/>
         <input type = "text"
           onChange = {handleChange}
           name = "repo"
           value = {formData.repo}
         />
+        <br/>
         <button>Submit</button>
       </form> 
     </div>

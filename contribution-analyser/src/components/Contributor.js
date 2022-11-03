@@ -9,11 +9,11 @@ function Contributor(props) {
 
     useEffect(() => {
         getContributorDetails(contributor.login, setContributorDetails, setHasError, setIsDataDisplayed)
-    }, [])
+    }, [contributor.login, setContributorDetails, setHasError, setIsDataDisplayed])
 
     return (
         <div className="contributor" key={contributor.id}>
-            <img src={contributor.avatar_url} />
+            <img src={contributor.avatar_url} alt={`${contributor.login}'s avatar`} />
             <div className="contributor--details">
                 <p><span className="label">Name:</span>{name ? name : "Unknown"}</p>
                 <p><span className="label">Login:</span> {contributor.login}</p>

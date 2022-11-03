@@ -1,7 +1,6 @@
 import { useState } from "react"
 import Form from "./components/Form"
 import Contributor from "./components/Contributor"
-import { getContributorDetails } from "./fetchData";
 import './App.css';
 
 function App() {
@@ -44,7 +43,7 @@ function App() {
               <p><span className="label">Language:</span> {language}</p>
               <p><span className="label">License:</span> {license ? license.name : "No license"}</p>
               <p><span className="label">Star count:</span> {stargazers_count}</p>
-              <p><span className="label">URL:</span> <a href={html_url} target="_blank">{html_url}</a></p>
+              <p><span className="label">URL:</span> <a href={html_url} target="_blank" rel="noreferrer">{html_url}</a></p>
             </div>
             
 

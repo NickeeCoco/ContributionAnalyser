@@ -12,12 +12,15 @@ function App() {
     auth: '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'
   })
 
-  useEffect(() => {
-    getGithubUsers()
-  }, [])
+  // useEffect(() => {
+  //   getGithubUsers()
+  // }, [])
 
-  async function getGithubUsers() {
-    const result = await octokit.request("GET /users")
+  async function getGithubData(owner, repo) {
+    const result = await octokit.request("GET /repos/{owner}/{repo}", {
+      owner,
+      repo
+    })
     console.log(result.data)
   }
 
@@ -33,7 +36,8 @@ function App() {
 
   function handleSubmit(e) {
     e.preventDefault()
-    console.log(formData)
+    const {owner, repo} = formData
+    getGithubData(owner, repo)
   }
 
   return (
@@ -51,8 +55,6 @@ function App() {
         />
         <button>Submit</button>
       </form> 
-      <p>Owner: {formData.owner}</p>
-      <p>Repo: {formData.repo}</p>
     </div>
   );
 }

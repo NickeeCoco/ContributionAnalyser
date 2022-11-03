@@ -31,9 +31,14 @@ function App() {
     })
   }
 
+  function handleSubmit(e) {
+    e.preventDefault()
+    console.log(formData)
+  }
+
   return (
     <div className="App">
-      <form>
+      <form onSubmit={handleSubmit}>
         <input type = "text"
           onChange = {handleChange}
           name = "owner"

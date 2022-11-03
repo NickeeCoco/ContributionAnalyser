@@ -1,7 +1,7 @@
 import { Octokit } from "octokit"
 
 const octokit = new Octokit({
-    auth: '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'
+    auth: ''
 })
 
 async function getGithubData(owner, repo, setRepoData, setHasError, setIsDataDisplayed) {

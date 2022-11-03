@@ -1,7 +1,8 @@
 import { useState } from "react"
 import Form from "./components/Form"
+import Contributor from "./components/Contributor"
+import { getContributorDetails } from "./fetchData";
 import './App.css';
-import { Octokit } from "octokit"
 
 function App() {
 
@@ -14,15 +15,8 @@ function App() {
   const {name, description, language, license, stargazers_count, html_url} = repoData
 
   const contributorElements = contributors.map(contributor => {
-    return (
-      <div className="contributor" key={contributor.id}>
-        <img src={contributor.avatar_url} />
-        <div className="contributor--details">
-          <p><span className="label">Login:</span> {contributor.login}</p>
-          <p><span className="label">Contributions:</span> {contributor.contributions}</p>
-        </div>
-      </div>
-    )  
+
+    return <Contributor contributor={contributor} />  
   })
 
   return (

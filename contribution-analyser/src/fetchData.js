@@ -1,7 +1,7 @@
 import { Octokit } from "octokit"
 
 const octokit = new Octokit({
-    auth: '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'
+    auth: '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'
 })
 
 async function getGithubData(owner, repo, setRepoData, setHasError, setIsDataDisplayed) {
@@ -25,16 +25,27 @@ async function getGithubData(owner, repo, setRepoData, setHasError, setIsDataDis
 async function getTopContributors(owner, repo, setContributors, setHasError, setIsDataDisplayed) {
     try {
         const contributors = await octokit.request("GET /repos/{owner}/{repo}/contributors", {
-        owner,
-        repo
-    })
+            owner,
+            repo
+        })
 
-    setContributors(contributors.data.slice(0, 30))
-} catch (err) {
-    setHasError(true)
-    setIsDataDisplayed(false)
+        setContributors(contributors.data.slice(0, 30))
+    } catch (err) {
+        setHasError(true)
+        setIsDataDisplayed(false)
+    }
 }
 
+async function getContributorDetails(contributor, setHasError, setIsDataDisplayed) {
+    try {
+        const contributorDetails = await octokit.request("GET /users/{contributor}", {
+            contributor
+        })
+        return contributorDetails.data
+    } catch (err) {
+        setHasError(true)
+        setIsDataDisplayed(false)
+    }
 }
 
-export { getGithubData, getTopContributors }
+export { getGithubData, getTopContributors, getContributorDetails }

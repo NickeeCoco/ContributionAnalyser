@@ -9,6 +9,8 @@ function App() {
   })
 
   const [repoData, setRepoData] = useState({})
+  const [contributors, setContributors] = useState([])
+
   const [isDataDisplayed, setIsDataDisplayed] = useState(false)
   const [hasError, setHasError] = useState(false)
 
@@ -19,8 +21,8 @@ function App() {
   })
 
   useEffect(() => {
-    console.log(repoData)
-  }, [repoData])
+    console.log(contributors)
+  }, [contributors])
 
   async function getGithubData(owner, repo) {
     try {
@@ -40,6 +42,15 @@ function App() {
     }
   }
 
+  async function getTopContributors() {
+    const contributors = await octokit.request("GET /repos/{owner}/{repo}/contributors", {
+      owner: "charliermarsh",
+      repo: "ruff"
+    })
+
+    setContributors(contributors.data) 
+  }
+
   function handleChange(e) {
     const {name, value} = e.target
     setFormData(prevFormData => {
@@ -54,6 +65,7 @@ function App() {
     e.preventDefault()
     const {owner, repo} = formData
     getGithubData(owner, repo)
+    getTopContributors()
   }
 
   return (
